@@ -217,23 +217,16 @@ namespace System.Linq {
                 var call = LeftSideExpression as System.Linq.Expressions.MethodCallExpression;
                 if (call.Method.Name == "CompareString") {
                     var evalRightLambdaExpression = Expression.Lambda(call.Arguments[1], null);
-                    //Compile it, invoke it, and get the resulting hash
                     return (evalRightLambdaExpression.Compile().DynamicInvoke(null).GetHashCode());
                 }
             }
 
-            //rightside is where we get our hash...
             switch (RightSideExpression.NodeType) {
-                //shortcut constants, dont eval, will be faster
                 case ExpressionType.Constant:
                     var constantExpression = (ConstantExpression)RightSideExpression;
                     return (constantExpression.Value.GetHashCode());
-
-                //if not constant (which is provably terminal in a tree), convert back to Lambda and eval to get the hash.
                 default:
-                    //Lambdas can be created from expressions... yay
                     var evalRightLambdaExpression = Expression.Lambda(RightSideExpression, null);
-                    //Compile that mutherf-ker, invoke it, and get the resulting hash
                     return (evalRightLambdaExpression.Compile().DynamicInvoke(null).GetHashCode());
             }
         }

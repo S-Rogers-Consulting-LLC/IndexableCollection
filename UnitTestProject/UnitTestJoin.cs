@@ -47,18 +47,18 @@ namespace UnitTestProject {
             var indexableCollectionOfItemsB = Factory.CreateIndexableCollectionOtItems(collectionOfItemsB);
 
             var queryPerformanceResult1 = RunJoinTestForIndexedByString(indexableCollectionOfItemsA, indexableCollectionOfItemsB);
-            Console.WriteLine("[First Touch; Caching up Indexes] Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("[First Touch; Caching up Indexes] Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
 
             var iterationElapsedMillisecondsSum = (Decimal)0;
             for (var i = 0; i < Iterations; i++) {
                 queryPerformanceResult1 = RunJoinTestForIndexedByString(indexableCollectionOfItemsA, indexableCollectionOfItemsB);
-                Console.WriteLine("Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+                Console.WriteLine("Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
                 iterationElapsedMillisecondsSum += queryPerformanceResult1.ElapsedMilliseconds;
             }
             var iterationElapsedMillisecondsAverage = iterationElapsedMillisecondsSum / Iterations;
 
             var queryPerformanceResult2 = RunJoinTestForNotIndexedByString(collectionOfItemsA, collectionOfItemsB);
-            Console.WriteLine("Join Query of '" + queryPerformanceResult2.Count + "' Non Indexed Items occured in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("Join Query of '" + queryPerformanceResult2.Count + "' Non Indexed Items occurred in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
 
             var speedup = (queryPerformanceResult2.ElapsedMilliseconds / iterationElapsedMillisecondsAverage);
             Console.WriteLine("Indexes speed-up execution " + speedup + " times.");
@@ -78,18 +78,18 @@ namespace UnitTestProject {
             var indexableCollectionOfItemsB = Factory.CreateIndexableCollectionOtItems(collectionOfItemsB);
 
             var queryPerformanceResult1 = RunJoinTestForIndexedByGuid(indexableCollectionOfItemsA, indexableCollectionOfItemsB);
-            Console.WriteLine("[First Touch; Caching up Indexes] Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("[First Touch; Caching up Indexes] Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
 
             var iterationElapsedMillisecondsSum = (Decimal)0;
             for (var i = 0; i < Iterations; i++) {
                 queryPerformanceResult1 = RunJoinTestForIndexedByGuid(indexableCollectionOfItemsA, indexableCollectionOfItemsB);
-                Console.WriteLine("Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+                Console.WriteLine("Join Query of '" + queryPerformanceResult1.Count + "' Indexed Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
                 iterationElapsedMillisecondsSum += queryPerformanceResult1.ElapsedMilliseconds;
             }
             var iterationElapsedMillisecondsAverage = iterationElapsedMillisecondsSum / Iterations;
 
             var queryPerformanceResult2 = RunJoinTestForNotIndexedByGuid(collectionOfItemsA, collectionOfItemsB);
-            Console.WriteLine("Join Query of '" + queryPerformanceResult2.Count + "' Non Indexed Items occured in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("Join Query of '" + queryPerformanceResult2.Count + "' Non Indexed Items occurred in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
 
             var speedup = (queryPerformanceResult2.ElapsedMilliseconds / iterationElapsedMillisecondsAverage);
             Console.WriteLine("Indexes speed-up execution " + speedup + " times.");

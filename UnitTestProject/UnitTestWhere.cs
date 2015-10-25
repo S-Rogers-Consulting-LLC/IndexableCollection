@@ -1,8 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject {
     [TestClass]
@@ -48,24 +47,24 @@ namespace UnitTestProject {
         private Boolean IsIndexedWhereFasterByString(Int32 CollectionSize = 10000000, Int32 ItmeName = 42, Int32 Iterations = 10) {
             var collectionOfItems = Factory.CreateCollectionOtItems(CollectionSize);
             var indexableCollectionOfItems = Factory.CreateIndexableCollectionOtItems(collectionOfItems).DisableAutoInexing()
-                                                                                                .BuildIndex(property => property.Name)
-                                                                                                .BuildIndex(property => property.Average)
-                                                                                                .BuildIndex(property => property.Number);
+                                                                                                                            .BuildIndex(property => property.Name)
+                                                                                                                            .BuildIndex(property => property.Average)
+                                                                                                                            .BuildIndex(property => property.Number);
 
             var queryPerformanceResult1 = RunWhereTestForIndexedByString(indexableCollectionOfItems, ItmeName);
-            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
 
             var iterationElapsedMillisecondsSum = (Decimal)0;
             for (var i = 0; i < Iterations; i++) {
                 queryPerformanceResult1 = RunWhereTestForIndexedByString(indexableCollectionOfItems, ItmeName);
-                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
                 iterationElapsedMillisecondsSum += queryPerformanceResult1.ElapsedMilliseconds;
             }
             var iterationElapsedMillisecondsAverage = iterationElapsedMillisecondsSum / Iterations;
 
 
             var queryPerformanceResult2 = RunWhereTestForNotIndexedByString(collectionOfItems, ItmeName);
-            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occured in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occurred in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
 
             var speedup = (queryPerformanceResult2.ElapsedMilliseconds / iterationElapsedMillisecondsAverage);
             Console.WriteLine("Indexes speed-up execution " + speedup + " times.");
@@ -78,19 +77,19 @@ namespace UnitTestProject {
             var indexableCollectionOfItems = Factory.CreateIndexableCollectionOtItems(collectionOfItems);
 
             var queryPerformanceResult1 = RunWhereTestForIndexedByGuid(indexableCollectionOfItems, ItmeName);
-            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
 
             var iterationElapsedMillisecondsSum = (Decimal)0;
             for (var i = 0; i < Iterations; i++) {
                 queryPerformanceResult1 = RunWhereTestForIndexedByGuid(indexableCollectionOfItems, ItmeName);
-                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
                 iterationElapsedMillisecondsSum += queryPerformanceResult1.ElapsedMilliseconds;
             }
             var iterationElapsedMillisecondsAverage = iterationElapsedMillisecondsSum / Iterations;
 
 
             var queryPerformanceResult2 = RunWhereTestForNotIndexedByGuid(collectionOfItems, ItmeName);
-            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occured in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occurred in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
 
             var speedup = (queryPerformanceResult2.ElapsedMilliseconds / iterationElapsedMillisecondsAverage);
             Console.WriteLine("Indexes speed-up execution " + speedup + " times.");
@@ -103,18 +102,18 @@ namespace UnitTestProject {
             var indexableCollectionOfItems = Factory.CreateIndexableCollectionOtItemsUsingAdd(collectionOfItems);
 
             var queryPerformanceResult1 = RunOrderdByWhereTestForIndexedByString(indexableCollectionOfItems, ItmeName);
-            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("[First Touch; Caching up Indexes] Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
 
             var iterationElapsedMillisecondsSum = (Decimal)0;
             for (var i = 0; i < Iterations; i++) {
                 queryPerformanceResult1 = RunOrderdByWhereTestForIndexedByString(indexableCollectionOfItems, ItmeName);
-                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occured in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
+                Console.WriteLine("Indexed Query of '" + queryPerformanceResult1.Count + "' Items occurred in " + queryPerformanceResult1.ElapsedMilliseconds + " ms!");
                 iterationElapsedMillisecondsSum += queryPerformanceResult1.ElapsedMilliseconds;
             }
             var iterationElapsedMillisecondsAverage = iterationElapsedMillisecondsSum / Iterations;
 
             var queryPerformanceResult2 = RunOrderdByWhereTestForNotIndexedByString(collectionOfItems, ItmeName);
-            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occured in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
+            Console.WriteLine("Non Indexed Query of '" + queryPerformanceResult2.Count + "' Items occurred in " + queryPerformanceResult2.ElapsedMilliseconds + " ms!");
 
             var speedup = (queryPerformanceResult2.ElapsedMilliseconds / iterationElapsedMillisecondsAverage);
             Console.WriteLine("Indexes speed-up execution " + speedup + " times.");
